@@ -7,7 +7,7 @@ $same_day-blue-invert: #fff
 $primary: $same_day-blue
 $primary-invert: $same_day-blue-invert
 $body-color: #333
-$black: #2b2523
+$black: #e6e6e6
 $btn-primary: $same_day-blue
 $scheme-invert: $same_day-blue-invert
 
@@ -143,6 +143,17 @@ $menu-label-color: $white-ter
     margin: 0 0 1em;
 
 @import "~bulma/sass/utilities/mixins"
+@import "~bulma/sass/helpers/other"
 @import "~bulma/sass/helpers/typography"
 @import "~bulma/sass/helpers/visibility"
 @import "~bulma/sass/grid/all"
+
+.is-justified-between
+  justify-content: space-between;
+
+.is-align-center
+  align-items: center;
+
+.section p.description,
+.section ul li
+  font-size: 0.9rem;

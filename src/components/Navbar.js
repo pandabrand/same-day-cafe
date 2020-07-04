@@ -69,7 +69,7 @@ const Navbar = class extends React.Component {
                 Contact
               </Link>
             </div>
-            <div className="navbar-end is-flex has-text-centered">
+            <div className="navbar-end is-flex is-align-center has-text-centered">
               <a
                 className="navbar-item btn btn-primary" 
                 href="https://ordering.chownow.com/order/22432/locations" 

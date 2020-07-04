@@ -4,13 +4,11 @@ import { Link, graphql } from 'gatsby'
 
 import Layout from '../components/Layout'
 import Categories from '../components/Categories'
-import BlogRoll from '../components/BlogRoll'
 import PreviewCompatibleImage from '../components/PreviewCompatibleImage'
 
 export const IndexPageTemplate = ({
   image,
   overlay_image,
-  heading,
   mainpitch,
   menu,
 }) => (
@@ -62,19 +60,6 @@ export const IndexPageTemplate = ({
                   {menu.categories.map((category) => (
                     <Categories categories={category} />
                   ))}
-                  <div className="columns">
-                    <div className="column">
-                      <h3 className="has-text-weight-semibold is-size-2">
-                        Latest stories
-                      </h3>
-                      <BlogRoll />
-                      <div className="column has-text-centered">
-                        <Link className="btn" to="/blog">
-                          Read more
-                        </Link>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
