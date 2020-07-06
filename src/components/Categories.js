@@ -1,18 +1,39 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Menus from './Menus'
+import { makeStyles } from '@material-ui/core/styles'
+import Grid from '@material-ui/core/Grid'
+import Paper from '@material-ui/core/Paper'
 
-const Categories = ({ categories }) => (
-  <div className="columns is-multiline is-desktop">
-    <div className="column is-full">
-      <h1 className="title">
-        {categories.title}
-      </h1>
-      {categories.description ? <h5>{categories.description}</h5> : ''}
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+    paddingBottom: '4rem',
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: 'left',
+    color: theme.palette.text.secondary,
+  },
+}));
+
+const Categories = ({ categories }) => {
+  const classes = useStyles();
+
+  return (
+    <div className={classes.root}>
+      <Paper className={classes.paper} >
+        <h1 className="title">
+          {categories.title}
+        </h1>
+        {categories.description ? <h5>{categories.description}</h5> : ''}
+        <Grid container spacing={4}>
+          <Menus gridItems={categories.items} />
+        </Grid>
+      </Paper>
     </div>
-    <Menus gridItems={categories.items} />
-  </div>
-)
+  );
+}
 
 Categories.propTypes = {
   categories: PropTypes.arrayOf({

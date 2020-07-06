@@ -1,31 +1,31 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import Grid from '@material-ui/core/Grid'
 
-const MenuGrid = ({ gridItems }) => (
-  <>
+const MenuGrid = ({ gridItems }) => {
+
+  return (<>
   {gridItems.map((item) => (
-    <div key={item.text} className="column is-one-third">
-      <section className="section">
-        <div className="is-flex is-justified-between">
-          <p className="has-text-weight-bold">{item.item}</p>
-          <p className="has-text-weight-bold">{item.price}</p>
-        </div>
-        <div>
-          <p className="description">{item.text}</p>
-          {item.options ? 
-            <ul>
-              {item.options.map((option) => (
-                <li className="is-italic has-text-weight-light" key={option}>{option}</li>
-                ))}
-            </ul>
-            : ''
-          }
-        </div>
-      </section>
-    </div>
+    <Grid key={item.text} item xs={4} container direction="column">
+      <Grid item container direction="row" justify="space-between" alignItems="center">
+        <Grid item>{item.item}</Grid>
+        <Grid item>{item.price}</Grid>
+      </Grid>
+      <Grid item container direction="column" justify="flex-start">
+        <Grid item>{item.text}</Grid>
+        {item.options ? 
+          <Grid item container direction="column" justify="flex-start">
+            {item.options.map((option) => (
+              <Grid item key={option}>{option}</Grid>
+              ))}
+          </Grid>
+          : ''
+        }
+      </Grid>
+    </Grid>
   ))}
-  </>
-)
+  </>);
+}
 
 MenuGrid.propTypes = {
   gridItems: PropTypes.arrayOf(
