@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Helmet } from 'react-helmet'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
@@ -7,6 +7,12 @@ import useSiteMetadata from './SiteMetadata'
 import { withPrefix } from 'gatsby'
 
 const TemplateWrapper = ({ children }) => {
+  useEffect(() => {
+    const scriptTag = document.createElement("script");
+    scriptTag.src = "https://cf.chownowcdn.com/latest/static/integrations/ordering-modal.min.js";
+    scriptTag.dataset.chownowCompanyId = '22432';
+    document.body.appendChild(scriptTag);
+  }, []);
   const { title, description } = useSiteMetadata()
   return (
     <div>

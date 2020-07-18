@@ -26,6 +26,7 @@ const Categories = ({ categories }) => {
         <h1 className="title">
           {categories.title}
         </h1>
+        <a className="chownow-order-online" href="https://ordering.chownow.com/order/22432/locations">Order Now</a>
         {categories.description ? <h5>{categories.description}</h5> : ''}
         <Grid container spacing={4}>
           <Menus gridItems={categories.items} />
