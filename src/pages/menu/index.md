@@ -1,7 +1,8 @@
 ---
-templateKey: index-page
+templateKey: menu-page
 title: Same Day Cafe
-image: /img/Same_Day_Hero.jpg
+image: ../img/Same_Day_Hero.jpg
+overlay_image: ../../img/Same_Day_Logo.png
 mainpitch:
   title: Same Day Cafe
 menu:

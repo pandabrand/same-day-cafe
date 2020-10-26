@@ -3,10 +3,14 @@ import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 
 import Layout from '../components/Layout'
+import Categories from '../components/Categories'
+import PreviewCompatibleImage from '../components/PreviewCompatibleImage'
 
-export const IndexPageTemplate = ({
+export const MenuPageTemplate = ({
   image,
+  overlay_image,
   mainpitch,
+  menu,
 }) => (
   <div>
     <div
@@ -34,6 +38,9 @@ export const IndexPageTemplate = ({
           marginLeft: '3rem'
         }}
       >
+        <div>
+          <PreviewCompatibleImage imageInfo={overlay_image} />
+        </div>
       </div>
     </div>
     <section className="section section--gradient">
@@ -48,7 +55,11 @@ export const IndexPageTemplate = ({
                   </div>
                 </div>
                 <div className="content">
+                  <h3 className="has-text-weight-semibold is-size-2">Menu</h3>
                 </div>
+                  {menu.categories.map((category) => (
+                    <Categories categories={category} />
+                  ))}
               </div>
             </div>
           </div>
@@ -58,30 +69,44 @@ export const IndexPageTemplate = ({
   </div>
 )
 
-IndexPageTemplate.propTypes = {
+MenuPageTemplate.propTypes = {
   image: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   title: PropTypes.string,
   heading: PropTypes.string,
   mainpitch: PropTypes.object,
+  menu: PropTypes.shape({
+    categories: PropTypes.arrayOf({
+      title: PropTypes.string,
+      description: PropTypes.string,
+      items: PropTypes.arrayOf({
+        text: PropTypes.string,
+        item: PropTypes.string,
+        price: PropTypes.string,
+        options: PropTypes.array
+      })
+    }),
+  }),
 }
 
-const IndexPage = ({ data }) => {
+const MenuPage = ({ data }) => {
   const { frontmatter } = data.markdownRemark
 
   return (
     <Layout>
-      <IndexPageTemplate
+      <MenuPageTemplate
         image={frontmatter.image}
+        overlay_image={frontmatter.overlay_image}
         title={frontmatter.title}
         heading={frontmatter.heading}
         mainpitch={frontmatter.mainpitch}
         intro={frontmatter.intro}
+        menu={frontmatter.menu}
       />
     </Layout>
   )
 }
 
-IndexPage.propTypes = {
+MenuPage.propTypes = {
   data: PropTypes.shape({
     markdownRemark: PropTypes.shape({
       frontmatter: PropTypes.object,
@@ -89,11 +114,11 @@ IndexPage.propTypes = {
   }),
 }
 
-export default IndexPage
+export default MenuPage
 
 export const pageQuery = graphql`
-  query IndexPageTemplate {
-    markdownRemark(frontmatter: { templateKey: { eq: "index-page" } }) {
+  query MenuPageTemplate {
+    markdownRemark(frontmatter: { templateKey: { eq: "menu-page" } }) {
       frontmatter {
         title
         image {
@@ -103,8 +128,27 @@ export const pageQuery = graphql`
             }
           }
         }
+        overlay_image {
+          childImageSharp {
+            fluid(maxWidth: 500, quality: 100) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
         mainpitch {
           title
+        }
+        menu {
+          categories {
+            title
+            description
+            items {
+              text
+              item
+              price
+              options
+            }
+          }
         }
       }
     }

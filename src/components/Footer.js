@@ -1,77 +1,54 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { Link } from 'gatsby'
 
-import logo from '../img/Same_Day_Logo.png'
-import facebook from '../img/social/facebook.svg'
-import instagram from '../img/social/instagram.svg'
-import twitter from '../img/social/twitter.svg'
-import vimeo from '../img/social/vimeo.svg'
+import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl';
+import 'mapbox-gl/dist/mapbox-gl.css';
 
-const Footer = class extends React.Component {
-  render() {
+const Map = ReactMapboxGl({accessToken: process.env.GATSBY_MAPBOX_API});
+
+const Footer = () => {
+
     return (
-      <footer className="footer has-background-black has-text-white-ter">
-        <div className="content has-text-centered">
-          <img
-            src={logo}
-            alt="Same Day cafe"
-            style={{ width: '8em', height: '8em' }}
-          />
-        </div>
-        <div className="content has-text-centered has-background-black has-text-white-ter">
-          <div className="container has-background-black has-text-white-ter">
-            <div style={{ maxWidth: '100vw' }} className="columns">
-              <div className="column is-4">
-                <section className="menu">
-                  <ul className="menu-list">
-                    <li>
-                      <Link to="/" className="navbar-item">
-                        Home
-                      </Link>
-                    </li>
-                  </ul>
-                </section>
-              </div>
-              <div className="column is-4 social">
-                <a title="facebook" href="https://facebook.com">
-                  <img
-                    src={facebook}
-                    alt="Facebook"
-                    style={{ width: '1em', height: '1em' }}
-                  />
-                </a>
-                <a title="twitter" href="https://twitter.com">
-                  <img
-                    className="fas fa-lg"
-                    src={twitter}
-                    alt="Twitter"
-                    style={{ width: '1em', height: '1em' }}
-                  />
-                </a>
-                <a title="instagram" href="https://instagram.com">
-                  <img
-                    src={instagram}
-                    alt="Instagram"
-                    style={{ width: '1em', height: '1em' }}
-                  />
-                </a>
-                <a title="vimeo" href="https://vimeo.com">
-                  <img
-                    src={vimeo}
-                    alt="Vimeo"
-                    style={{ width: '1em', height: '1em' }}
-                  />
-                </a>
+      <footer className="footer">
+       <div className="content">
+          <div className="container">
+            <div style={{ maxWidth: '100vw' }} className="columns is-centered">
+              <div className="column is-8">
+                <Map
+                  style="mapbox://styles/pandabrand/ckgpxhk412p7u1amqb43ad3lw"
+                  containerStyle={{
+                    height: '450px',
+                    width: '100%',
+                  }}
+                  center={{
+                    lng: -87.7093967,
+                    lat: 41.929921
+                  }}
+                  zoom={[15]}
+                >
+                    <Layer type="symbol" id="marker" layout={{ 'icon-image': 'marker-15' }}>
+                      <Feature coordinates={[41.929921,-87.7093967]} />
+                    </Layer>
+                  </Map>
               </div>
               <div className="column is-4">
-                <section className="menu">
-                  <ul className="menu-list">
-                    <li>
-                      <Link className="navbar-item" to="/about">
-                        About
-                      </Link>
-                    </li>
-                  </ul>
+                <section className="info">
+                  <div class="block">
+                    Address:<br/>
+                    2651 North Kedzie Ave.<br/>
+                    Chicago, IL 60647<br/>
+                    773-342-7040
+                  </div>
+                  <div class="block">
+                    Hours:<br/>
+                    Tuesday - Saturday: 10-6<br/>
+                    Sunday: 10-4
+                  </div>
+                  <div class="block">
+                    Holiday Hours:<br/>
+                    Closed Dec. 24, 25, & 31<br/>
+                    Check Instagram for updates
+                  </div>
                 </section>
               </div>
             </div>
@@ -79,7 +56,6 @@ const Footer = class extends React.Component {
         </div>
       </footer>
     )
-  }
 }
 
 export default Footer
