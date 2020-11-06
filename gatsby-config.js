@@ -73,5 +73,13 @@ module.exports = {
       },
     }, // must be after other CSS plugins
     'gatsby-plugin-netlify', // make sure to keep it last in the array
+    {
+      resolve: 'gatsby-source-instagram',
+      options: {
+        username: '8556131572',
+        paginate: 1,
+        maxPosts: 8,
+      },
+    },
   ],
 }

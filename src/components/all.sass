@@ -149,8 +149,11 @@ $menu-label-color: $white-ter
     max-width: 70%;
     margin: 0 0 1em;
 
-@import "~bulma/sass/utilities/mixins"
+@import "~bulma/sass/utilities/all"
 @import "~bulma/sass/helpers/other"
+@import "~bulma/sass/helpers/color"
+@import "~bulma/sass/helpers/flexbox"
+@import "~bulma/sass/helpers/spacing"
 @import "~bulma/sass/helpers/typography"
 @import "~bulma/sass/helpers/visibility"
 @import "~bulma/sass/grid/all"
@@ -164,3 +167,17 @@ $menu-label-color: $white-ter
 .section p.description,
 .section ul li
   font-size: 0.9rem;
+
+.button-position-home
+  position: absolute;
+  right: 250px;
+  top: 60px;
+
+.ml-auto
+  margin-left: auto;
+
+.mr-auto
+  margin-right: auto;
+
+.has-fit-content
+  max-width: fit-content;

@@ -3,11 +3,11 @@ import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 
 import Layout from '../components/Layout'
+import instagramLogo from '../img/instagram.svg';
 
-export const IndexPageTemplate = ({
-  image,
-  mainpitch,
-}) => (
+export const IndexPageTemplate = ({ image, second_hero, instagramPhotos }) =>
+{
+   return (
   <div>
     <div
       className="full-width-image margin-top-0"
@@ -16,39 +16,62 @@ export const IndexPageTemplate = ({
           !!image.childImageSharp ? image.childImageSharp.fluid.src : image
         })`,
         backgroundPosition: `bottom center`,
-        backgroundAttachment: `fixed`,
       }}
     >
-      <div
-        style={{
-          display: 'flex',
-          height: '100%',
-          width: '100%',
-          maxHeight: '400px',
-          maxWidth: '400px',
-          lineHeight: '1',
-          justifyContent: 'space-around',
-          alignItems: 'left',
-          flexDirection: 'column',
-          marginRight: 'auto',
-          marginLeft: '3rem'
-        }}
-      >
+      <div className="hero">
+        <div className="hero-body">
+          <div className="container">
+            <div className="full-width-image-container">
+              <div className="button-position-home">
+                <a href="https://google.com" className="button is-primary is-uppercase">Order Now</a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <section className="section section--gradient">
-      <div className="container">
-        <div className="section">
-          <div className="columns">
-            <div className="column is-10 is-offset-1">
-              <div className="content">
-                <div className="content">
-                  <div className="tile">
-                    <h1 className="title">{mainpitch.title}</h1>
-                  </div>
+    <section>
+      <div className="container has-background-primary is-fluid">
+        <div className="columns">
+          <div className="column">
+            <a href="#" className="has-text-white p-1 has-text-centered ml-auto mr-auto is-block is-uppercase">Order for Pick Up or Delivery</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section className="hero">
+      <div className="hero-body">
+        <div className="container has-text-centered mb-2">
+          <div><img src={instagramLogo} style={{width: '60px', height: '60px'}}/></div>
+        </div>
+        <div className="container">
+          <div className="columns is-multiline is-justify-content-center">
+            {
+              instagramPhotos.map((photo, index) => {
+                return <div key={index} className="column is-one-quarter">
+                  <img src={photo.localFile.childImageSharp.fixed.src} width="250" height="250" />
                 </div>
-                <div className="content">
-                </div>
+              })
+            }
+          </div>
+        </div>
+      </div>
+    </section>
+    <section className="hero">
+      <div
+        className="full-width-image mt-0"
+        style={{
+          backgroundImage: `url(${
+            !!second_hero.childImageSharp ? second_hero.childImageSharp.fluid.src : second_hero
+          })`,
+          backgroundPosition: `bottom center`,
+        }}
+      >
+        <div className="hero">
+          <div className="hero-body">
+            <div className="container">
+              <div className="full-width-image-container">
+                  <a href="https://google.com" className="button is-primary is-uppercase">Order Now</a>
               </div>
             </div>
           </div>
@@ -56,26 +79,27 @@ export const IndexPageTemplate = ({
       </div>
     </section>
   </div>
-)
+)}
 
 IndexPageTemplate.propTypes = {
   image: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   title: PropTypes.string,
   heading: PropTypes.string,
-  mainpitch: PropTypes.object,
 }
 
 const IndexPage = ({ data }) => {
   const { frontmatter } = data.markdownRemark
+  const { nodes } = data.allInstaNode
 
   return (
     <Layout>
       <IndexPageTemplate
         image={frontmatter.image}
+        second_hero={frontmatter.second_hero}
         title={frontmatter.title}
         heading={frontmatter.heading}
-        mainpitch={frontmatter.mainpitch}
         intro={frontmatter.intro}
+        instagramPhotos={nodes}
       />
     </Layout>
   )
@@ -86,6 +110,9 @@ IndexPage.propTypes = {
     markdownRemark: PropTypes.shape({
       frontmatter: PropTypes.object,
     }),
+    allInstaNode: PropTypes.shape({
+      nodes: PropTypes.array
+    })
   }),
 }
 
@@ -103,8 +130,30 @@ export const pageQuery = graphql`
             }
           }
         }
+        second_hero {
+          childImageSharp {
+            fluid(maxWidth: 2048, quality: 100) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
         mainpitch {
           title
+        }
+      }
+    }
+    allInstaNode(sort: {order: DESC, fields: timestamp}, limit: 8) {
+      nodes {
+        id
+        timestamp
+        original
+        caption
+        localFile {
+          childImageSharp {
+            fixed(width: 250, height: 250) {
+              ...GatsbyImageSharpFixed
+            }
+          }
         }
       }
     }

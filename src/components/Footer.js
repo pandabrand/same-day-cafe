@@ -1,5 +1,4 @@
-import React, { useRef } from 'react'
-import { Link } from 'gatsby'
+import React from 'react'
 
 import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -32,24 +31,24 @@ const Footer = () => {
                   </Map>
               </div>
               <div className="column is-4">
-                <section className="info">
-                  <div class="block">
+                <div className="is-flex is-flex-direction-column is-justify-content-center is-align-content-flex-start is-align-items-flex-start ml-auto mr-auto has-fit-content">
+                  <div className="block">
                     Address:<br/>
                     2651 North Kedzie Ave.<br/>
                     Chicago, IL 60647<br/>
                     773-342-7040
                   </div>
-                  <div class="block">
+                  <div className="block">
                     Hours:<br/>
                     Tuesday - Saturday: 10-6<br/>
                     Sunday: 10-4
                   </div>
-                  <div class="block">
+                  <div className="block">
                     Holiday Hours:<br/>
                     Closed Dec. 24, 25, & 31<br/>
                     Check Instagram for updates
                   </div>
-                </section>
+                </div>
               </div>
             </div>
           </div>
