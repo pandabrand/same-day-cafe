@@ -41,15 +41,17 @@ export const IndexPageTemplate = ({ image, second_hero, instagramPhotos }) =>
     </section>
     <section className="hero">
       <div className="hero-body">
-        <div className="container has-text-centered mb-2">
+        <div className="container has-text-centered mb-4">
           <div><img src={instagramLogo} style={{width: '60px', height: '60px'}}/></div>
         </div>
         <div className="container">
           <div className="columns is-multiline is-justify-content-center">
             {
               instagramPhotos.map((photo, index) => {
-                return <div key={index} className="column is-one-quarter">
-                  <img src={photo.localFile.childImageSharp.fixed.src} width="250" height="250" />
+                return <div key={index} className="column is-one-quarter py-4">
+                  <div className="is-flex is-justify-content-center is-align-items-center">
+                    <img src={photo.localFile.childImageSharp.fixed.src} width="250" height="250" />
+                  </div>
                 </div>
               })
             }
@@ -59,12 +61,12 @@ export const IndexPageTemplate = ({ image, second_hero, instagramPhotos }) =>
     </section>
     <section className="hero">
       <div
-        className="full-width-image mt-0"
+        className="full-width-image secondary mt-0"
         style={{
           backgroundImage: `url(${
             !!second_hero.childImageSharp ? second_hero.childImageSharp.fluid.src : second_hero
           })`,
-          backgroundPosition: `bottom center`,
+          backgroundPosition: `bottom 20px`,
         }}
       >
         <div className="hero">
