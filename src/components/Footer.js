@@ -3,7 +3,7 @@ import React from 'react'
 import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-const Map = ReactMapboxGl({accessToken: process.env.GATSBY_MAPBOX_API});
+const Map = ReactMapboxGl({accessToken: process.env.GATSBY_MAPBOX_API, scrollZoom: false});
 
 const Footer = () => {
 
@@ -11,25 +11,27 @@ const Footer = () => {
       <footer className="footer">
        <div className="content">
           <div className="container">
-            <div style={{ maxWidth: '100vw' }} className="columns is-centered">
+            <div className="columns">
               <div className="column is-8">
-                <Map
-                  style="mapbox://styles/pandabrand/ckgpxhk412p7u1amqb43ad3lw"
-                  containerStyle={{
-                    height: '450px',
-                    width: '100%',
-                    border: '2px solid gray',
-                  }}
-                  center={{
-                    lng: -87.707,
-                    lat: 41.930
-                  }}
-                  zoom={[17]}
-                >
+                <div className="p-4">
+                  <Map
+                    style="mapbox://styles/pandabrand/ckgpxhk412p7u1amqb43ad3lw"
+                    containerStyle={{
+                      height: '450px',
+                      width: '100%',
+                      border: '2px solid gray',
+                    }}
+                    center={{
+                      lng: -87.707,
+                      lat: 41.930
+                    }}
+                    zoom={[17]}
+                  >
                     <Layer type="symbol" id="marker" layout={{ 'icon-image': 'marker-15' }}>
                       <Feature coordinates={[-87.70692,41.9299]} />
                     </Layer>
                   </Map>
+                </div>
               </div>
               <div className="column is-4">
                 <div className="is-flex is-flex-direction-column is-justify-content-space-around is-align-content-flex-start is-align-items-flex-start ml-auto mr-auto has-fit-content height-100">
